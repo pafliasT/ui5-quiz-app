@@ -1,0 +1,142 @@
+{
+    "Questions": [
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        },
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer. <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        },
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer. <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        },
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer. <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        },
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer. <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        },
+        {
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "options": [
+                "Delete",
+                "Put",
+                "Post",
+                "Get"
+            ],
+            "correctAnswer": [
+                "Put",
+                "Post"
+            ]
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer. <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                "The bootstrap will load and the application will run successfully but without a theme",
+                "The bootstrap will load and the customer-defined default theme will be used",
+                "The bootstrap will NOT load and the application will produce an error message that the theme is missing",
+                "The bootstrap will load and the SAP default theme will be used"
+            ],
+            "correctAnswer": "The bootstrap will load and the application will run successfully but without a theme"
+        }
+    ]
+}

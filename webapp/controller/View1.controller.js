@@ -1,82 +1,116 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-],
-    function (Controller, MessageToast) {
-        "use strict";
+    "sap/ui/core/UIComponent"
+], function (Controller, UIComponent) {
+    "use strict";
 
-        return Controller.extend("project1.controller.View1", {
-            onInit: function () {
-                const oComponent = this.getOwnerComponent();
-                this.oQuizModel = oComponent.getModel("quizModel");
-                if (this.oQuizModel.getData() && Object.keys(this.oQuizModel.getData()).length !== 0) {
-                    this.setupView();
-                } else {
-                    this.oQuizModel.attachRequestCompleted(this.onModelLoaded, this);
-                }
-            },
-            onModelLoaded: function () {
-                this.setupView();
-            },
-            setupView: function () {
-                this.updateSubmitButtonVisibility()
-            },
-            updateSubmitButtonVisibility: function () {
-                let oCarousel = this.byId("questionCarousel");
-                let aPages = oCarousel.getPages();
-                let sActivePageId = oCarousel.getActivePage();
-                let iCurrentPage = aPages.findIndex(page => page.getId() === sActivePageId);
-                let oData = this.oQuizModel.getData();
-                let bIsLastQuestion = iCurrentPage === oData.Questions.length - 1;
-                this.byId("submitQuizButton").setVisible(bIsLastQuestion);
-            },
-            onPageChanged: function (oEvent) {
-                this.updateSubmitButtonVisibility();
-            },
-            onOptionSelect: function (oEvent) {
-                let oList = oEvent.getSource();
-                let oBindingContext = oList.getBindingContext("quizModel");
-                let oQuestion = oBindingContext.getObject();
+    return Controller.extend("project1.controller.View1", {
+        onInit: function () {
+            this.oComponent = this.getOwnerComponent();
+            this.oQuizModel = this.oComponent.getModel("quizModel");
+            this.oRouter = UIComponent.getRouterFor(this);
+            this.oRouter.getRoute("RouteView1").attachPatternMatched(this.onRouteMatched, this);
+        },
 
-                let aSelectedItems = oList.getSelectedItems();
-                let aSelectedTexts = aSelectedItems.map(item => item.getTitle().trim());
-                oQuestion.userAnswers = aSelectedTexts;
-                this.oQuizModel.refresh();
-            },
-            onSubmitQuiz: function () {
-                let score = this.calculateScore();
-                let scoreFormatted = score.toFixed(2);
-                let resultMessage = `You scored ${scoreFormatted}%.`;
-                if (score >= 66) {
-                    resultMessage += " Congratulations! You passed the quiz.";
-                } else {
-                    resultMessage += " Unfortunately, you scored below the passing threshold. Please try again.";
-                }
-                MessageToast.show(resultMessage, {
-                    duration: 6000
-                });
-            },
-            calculateScore: function () {
-                let oData = this.oQuizModel.getData();
-                let totalQuestions = oData.Questions.length;
-                let correctAnswers = 0;
+        onRouteMatched: function () {
+            this.setupView();
+            this.updateProgress();
+        },
 
-                oData.Questions.forEach(question => {
-                    let userAnswers = question.userAnswers || [];
-                    let correct = question.correctAnswer;
-                    let isCorrect = false;
+        setupView: function () {
+            this.toggleSubmitButtonVisibility();
+            this.updateProgress();
+        },
 
-                    if (question.multiple) {
-                        isCorrect = (userAnswers.length === correct.length) && userAnswers.every(answer => correct.includes(answer));
-                    } else {
-                        isCorrect = (userAnswers.length === 1) && correct.includes(userAnswers[0]);
-                    }
+        updateProgress: function () {
+            const oCarousel = this.byId("questionCarousel");
+            const aPages = oCarousel.getPages();
+            const iCurrentPage = aPages.findIndex(page => page.getId() === oCarousel.getActivePage()) + 1;
+            const totalQuestions = aPages.length;
+            const progress = (iCurrentPage / totalQuestions) * 100;
 
-                    if (isCorrect) correctAnswers++;
-                });
+            this.oQuizModel.setProperty("/progress", progress);
+            this.oQuizModel.setProperty("/progressText", `${Math.round(progress)}%`);
+        },
 
-                let scorePercentage = (correctAnswers / totalQuestions) * 100;
-                return scorePercentage;
+        toggleSubmitButtonVisibility: function () {
+            const oCarousel = this.byId("questionCarousel");
+            const aPages = oCarousel.getPages();
+            const iCurrentPage = aPages.findIndex(page => page.getId() === oCarousel.getActivePage());
+            const bIsLastQuestion = iCurrentPage === this.oQuizModel.getData().Questions.length - 1;
+
+            this.byId("submitQuizButton").setVisible(bIsLastQuestion);
+        },
+
+        onPageChanged: function (oEvent) {
+            this.toggleSubmitButtonVisibility();
+            this.updateProgress();
+        },
+
+        onOptionSelect: function (oEvent) {
+            const oList = oEvent.getSource();
+            const oBindingContext = oList.getBindingContext("quizModel");
+            const oQuestion = oBindingContext.getObject();
+            const aSelectedItems = oList.getSelectedItems();
+            const aSelectedTexts = aSelectedItems.map(item => item.getTitle().trim());
+
+            oQuestion.userAnswers = aSelectedTexts;
+            this.oQuizModel.refresh();
+        },
+
+        calculateScore: function () {
+            const oData = this.oQuizModel.getData();
+            const totalQuestions = oData.Questions.length;
+            let correctAnswers = oData.Questions.reduce((acc, question) => {
+                const { userAnswers = [], correctAnswer, multiple } = question;
+                const isCorrect = multiple ?
+                    (userAnswers.length === correctAnswer.length && userAnswers.every(answer => correctAnswer.includes(answer))) :
+                    (userAnswers.length === 1 && correctAnswer.includes(userAnswers[0]));
+                return acc + (isCorrect ? 1 : 0);
+            }, 0);
+
+            return (correctAnswers / totalQuestions) * 100;
+        },
+
+        onSubmitQuiz: function () {
+            const score = this.calculateScore();
+            const scoreFormatted = score.toFixed(2);
+            let resultsText = `You scored ${scoreFormatted}%.`;
+
+            if (score >= 66) {
+                resultsText += " Congratulations! You passed the quiz.";
+                this.getView().getModel("quizModel").setProperty("/dialogState", "Success");
+            } else {
+                resultsText += " Unfortunately, you scored below the passing threshold. Please try again.";
+                this.getView().getModel("quizModel").setProperty("/dialogState", "Error");
             }
-        });
+
+            this.byId("resultsText").setText(resultsText);
+            this.byId("resultsDialog").open();
+        },
+
+        onRestartQuiz: function () {
+            const oQuizModel = this.getView().getModel("quizModel");
+            oQuizModel.getData().Questions.forEach(question => {
+                question.userAnswers = [];
+            });
+            oQuizModel.refresh();
+            this.resetQuiz();
+        },
+
+        resetQuiz: function () {
+            const oCarousel = this.byId("questionCarousel");
+            oCarousel.getPages().forEach(page => {
+                const oList = page.getContent()[0].getItems()[0].getItems()[0];
+                if (oList && oList instanceof sap.m.List) {
+                    oList.removeSelections(true);
+                }
+            });
+            this.oQuizModel.setProperty("/progress", 0);
+            this.oQuizModel.setProperty("/progressText", "0%");
+            this.byId("resultsDialog").close();
+            oCarousel.setActivePage(oCarousel.getPages()[0]);
+            this.toggleSubmitButtonVisibility();
+        }
     });
+});

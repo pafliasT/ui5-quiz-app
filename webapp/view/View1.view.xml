@@ -4,14 +4,15 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}" titleAlignment="Center">
         <content>
-            <Carousel id="questionCarousel" pages="{quizModel>/Questions}" arrowsPlacement="PageIndicator" pageChanged="onPageChanged">
+            <Carousel id="questionCarousel" pages="{quizModel>/Questions}" arrowsPlacement="Content" pageChanged="onPageChanged">
                 <pages>
                     <Panel height="100%">
                         <headerToolbar>
                             <Toolbar height="auto">
-                                <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true" class="sapUiLargeMargin"/>
-                            </Toolbar>
-                        </headerToolbar>
+                                <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true" class="sapUiTinyMargin"/>
+								</Toolbar>
+							</headerToolbar>
+							<ProgressIndicator id="quizProgress" width="100%" percentValue="{quizModel>/progress}" displayValue="{quizModel>/progressText}"/>
                         <content>
                             <HBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" height="100%">
                                 <VBox justifyContent="Center" alignItems="Center" width="100%">
@@ -30,11 +31,24 @@
                 </pages>
             </Carousel>
         </content>
+		
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
                 <Button id='submitQuizButton' text="Submit Quiz" visible="false" press="onSubmitQuiz"/>
+                <ToolbarSpacer/>
             </Toolbar>
         </footer>
     </Page>
+	<Dialog id="resultsDialog" title="Quiz Results" icon="sap-icon://result" state="{quizModel>/dialogState}">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Text id="resultsText"/>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Restart Quiz" press="onRestartQuiz"/>
+        </beginButton>
+        
+    </Dialog>
 </mvc:View>

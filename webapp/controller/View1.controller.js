@@ -1,64 +1,82 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast"
-
 ],
-    /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
-     */
-    function (Controller,MessageToast) {
+    function (Controller, MessageToast) {
         "use strict";
 
         return Controller.extend("project1.controller.View1", {
             onInit: function () {
-
+                const oComponent = this.getOwnerComponent();
+                this.oQuizModel = oComponent.getModel("quizModel");
+                if (this.oQuizModel.getData() && Object.keys(this.oQuizModel.getData()).length !== 0) {
+                    this.setupView();
+                } else {
+                    this.oQuizModel.attachRequestCompleted(this.onModelLoaded, this);
+                }
             },
-
+            onModelLoaded: function () {
+                this.setupView();
+            },
+            setupView: function () {
+                this.updateSubmitButtonVisibility()
+            },
+            updateSubmitButtonVisibility: function () {
+                let oCarousel = this.byId("questionCarousel");
+                let aPages = oCarousel.getPages();
+                let sActivePageId = oCarousel.getActivePage();
+                let iCurrentPage = aPages.findIndex(page => page.getId() === sActivePageId);
+                let oData = this.oQuizModel.getData();
+                let bIsLastQuestion = iCurrentPage === oData.Questions.length - 1;
+                this.byId("submitQuizButton").setVisible(bIsLastQuestion);
+            },
+            onPageChanged: function (oEvent) {
+                this.updateSubmitButtonVisibility();
+            },
             onOptionSelect: function (oEvent) {
                 let oList = oEvent.getSource();
                 let oBindingContext = oList.getBindingContext("quizModel");
-                let oCurrentQuestion = oBindingContext.getObject();
+                let oQuestion = oBindingContext.getObject();
 
                 let aSelectedItems = oList.getSelectedItems();
-                let aSelectedTexts = aSelectedItems.map(item => item.getTitle().trim()); // Trimming to avoid whitespace issues
-                let aCorrectAnswers = oCurrentQuestion.correctAnswer; // Dynamically get correct answers from the current question context
-
-                // Check if all selected items are found in the correct answers
-                let allSelectedAreCorrect = aSelectedTexts.every(text => aCorrectAnswers.includes(text));
-
-                // Check if the number of selected items equals the number of correct answers
-                let allCorrectAnswersSelected = aCorrectAnswers.every(ans => aSelectedTexts.includes(ans));
-
-                if (allSelectedAreCorrect && allCorrectAnswersSelected) {
-                   MessageToast.show("Perfect! All correct answers selected.");
-                } else if (allSelectedAreCorrect) {
-                   MessageToast.show("Correct answer! Select more if necessary.");
-                } else {
-                   MessageToast.show("Incorrect answer, try again!");
-                }
+                let aSelectedTexts = aSelectedItems.map(item => item.getTitle().trim());
+                oQuestion.userAnswers = aSelectedTexts;
+                this.oQuizModel.refresh();
             },
-            // onSubmitQuiz: function () {
-            //     let quizModel = this.getView().getModel("quizModel");
-            //     let questions = quizModel.getProperty("/Questions");
-            //     let totalQuestions = questions.length;
-            //     let currentScore = 0;
+            onSubmitQuiz: function () {
+                let score = this.calculateScore();
+                let scoreFormatted = score.toFixed(2);
+                let resultMessage = `You scored ${scoreFormatted}%.`;
+                if (score >= 66) {
+                    resultMessage += " Congratulations! You passed the quiz.";
+                } else {
+                    resultMessage += " Unfortunately, you scored below the passing threshold. Please try again.";
+                }
+                MessageToast.show(resultMessage, {
+                    duration: 6000
+                });
+            },
+            calculateScore: function () {
+                let oData = this.oQuizModel.getData();
+                let totalQuestions = oData.Questions.length;
+                let correctAnswers = 0;
 
-            //     questions.forEach(question => {
-            //         if (question.answeredCorrectly) {
-            //             currentScore += 1; // Increment score for each correctly answered question
-            //         }
-            //     });
+                oData.Questions.forEach(question => {
+                    let userAnswers = question.userAnswers || [];
+                    let correct = question.correctAnswer;
+                    let isCorrect = false;
 
-            //     let percentageScore = (currentScore / totalQuestions) * 100;
-            //     quizModel.setProperty("/currentScore", currentScore);
-            //     quizModel.setProperty("/percentageScore", percentageScore);
+                    if (question.multiple) {
+                        isCorrect = (userAnswers.length === correct.length) && userAnswers.every(answer => correct.includes(answer));
+                    } else {
+                        isCorrect = (userAnswers.length === 1) && correct.includes(userAnswers[0]);
+                    }
 
-            //     // Display final result
-            //     if (percentageScore >= 66) {
-            //         MessageToast.show("Congratulations! You've passed the quiz with " + percentageScore.toFixed(2) + "%.");
-            //     } else {
-            //         MessageToast.show("Unfortunately, you did not pass. You scored " + percentageScore.toFixed(2) + "%.");
-            //     }
-            // }
+                    if (isCorrect) correctAnswers++;
+                });
+
+                let scorePercentage = (correctAnswers / totalQuestions) * 100;
+                return scorePercentage;
+            }
         });
     });

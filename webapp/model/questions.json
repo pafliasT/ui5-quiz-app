@@ -1,7 +1,7 @@
 {
     "Questions": [
         {
-            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? There are 2 correct answers to this question",
+            "question": "For which operations will the SAP Gateway server compute and return a new ETag in a response header? \n There are 2 correct answers to this question",
             "options": [
                 {
                     "text": "Delete"
@@ -20,7 +20,8 @@
                 "Put",
                 "Post"
             ],
-            "multiple": true
+            "multiple": true,
+            "userAnswers": []
         },
         {
             "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
@@ -41,7 +42,8 @@
             "correctAnswer": [
                 "The application will run without a theme"
             ],
-            "multiple": false
+            "multiple": false,
+            "userAnswers": []
         }
     ]
 }

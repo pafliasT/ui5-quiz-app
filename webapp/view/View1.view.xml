@@ -5,27 +5,24 @@
 	xmlns="sap.m">
 	<Page id="page" title="{i18n>title}" titleAlignment="Center">
 		<content>
-			<Carousel id="questionCarousel" pages="{quizModel>/Questions}" arrowsPlacement="Content">
-				<customData>
-					<core:CustomData key="questionIndex" value="{quizModel>index}" writeToDom="true"/>
-				</customData>
+			<Carousel id="questionCarousel" pages="{quizModel>/Questions}" arrowsPlacement="PageIndicator">
 				<pages>
-					<Panel headerText="{quizModel>question}" height="100%">
+					<Panel height="100%" >
 						<headerToolbar>
-                            <Toolbar >
-                                <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true"/>
+                            <Toolbar height="auto">
+                                <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true" class="sapUiLargeMargin"/>
                             </Toolbar>
                         </headerToolbar>
 						<content>
 							<HBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" height="100%">
 								<VBox justifyContent="Center" alignItems="Center" width="100%" >
-								<List id="optionsList" mode="SingleSelect" selectionChange="onOptionSelect" items="{quizModel>options}" >
-									<items>
-										<StandardListItem title="{quizModel>}" wrapping="true" />
-									</items>
-								</List>
-							</VBox>
-						</HBox>
+                                    <List id="optionsList" mode="{= ${quizModel>multiple} ? 'MultiSelect' : 'SingleSelectLeft'}" selectionChange="onOptionSelect"  items="{quizModel>options}" >
+                                        <items >
+                                            <StandardListItem title="{quizModel>text}" wrapping="true" />
+                                        </items>
+                                    </List>
+							    </VBox>
+						    </HBox>
 						</content>
 					</Panel>
 				</pages>
@@ -33,34 +30,3 @@
 		</content>
 	</Page>
 </mvc:View>
-<!-- <mvc:View controllerName="project1.controller.View1"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-	xmlns:core="sap.ui.core"
-
-	xmlns="sap.m">
-	<Page id="page" title="{i18n>title}" titleAlignment="Center">
-		<content>
-			<Carousel id="questionCarousel" pages="{quizModel>/Questions}">
-				<customData>
-					<core:CustomData key="questionIndex" value="{quizModel>index}" writeToDom="true"/>
-				</customData>
-				<pages>
-					<Panel headerText="{quizModel>question}">
-						<content>
-							<HBox
-								alignItems="Center"
-								justifyContent="Center"
-								width="100%">
-								<List id="optionsList" mode="SingleSelect" selectionChange="onOptionSelect" items="{quizModel>options}">
-									<items>
-										<StandardListItem title="{quizModel>}" wrapping="true" />
-									</items>
-								</List>
-							</HBox>
-						</content>
-					</Panel>
-				</pages>
-			</Carousel>
-		</content>
-	</Page>
-</mvc:View> -->

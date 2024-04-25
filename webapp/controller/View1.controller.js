@@ -101,16 +101,29 @@ sap.ui.define([
         resetQuiz: function () {
             const oCarousel = this.byId("questionCarousel");
             oCarousel.getPages().forEach(page => {
-                const oList = page.getContent()[0].getItems()[0].getItems()[0];
-                if (oList && oList instanceof sap.m.List) {
-                    oList.removeSelections(true);
+                let oList = page.getContent()[0];
+                if (oList.getItems && oList.getItems().length > 0) {
+
+                    oList = oList.getItems()[0];
+                    if (oList.getItems && oList.getItems().length > 0) {
+                        oList = oList.getItems()[0];
+                        if (oList instanceof sap.m.List) {
+                            oList.removeSelections(true);
+                        }
+                    }
                 }
             });
-            this.oQuizModel.setProperty("/progress", 0);
-            this.oQuizModel.setProperty("/progressText", "0%");
+
+            const oQuizModel = this.getView().getModel("quizModel");
+            oQuizModel.getData().Questions.forEach(question => question.userAnswers = []);
+            oQuizModel.refresh();
+            oQuizModel.setProperty("/progress", 0);
+            oQuizModel.setProperty("/progressText", "0%");
             this.byId("resultsDialog").close();
             oCarousel.setActivePage(oCarousel.getPages()[0]);
             this.toggleSubmitButtonVisibility();
         }
+
+
     });
 });

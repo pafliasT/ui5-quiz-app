@@ -125,6 +125,7 @@ sap.ui.define([
                 
                     // Set the active page to the first page in the carousel
                     oCarousel.setActivePage(aPages[0]);
+                    console.log("spiros");
                 }
                 
 

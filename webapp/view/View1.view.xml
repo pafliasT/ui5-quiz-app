@@ -12,9 +12,8 @@
                                 <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true" class="sapUiLargeMargin"/>
                             </Toolbar>
                         </headerToolbar>
-                        <content>
-                            <HBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" height="100%">
-                                <VBox justifyContent="Center" alignItems="Center" width="100%">
+                        <content >
+                            
                                     <List id="optionsList"
                                         mode="{= ${quizModel>multiple} ? 'MultiSelect' : 'SingleSelectLeft'}"
                                         selectionChange="onOptionSelect"
@@ -23,8 +22,7 @@
                                             <StandardListItem title="{quizModel>text}" wrapping="true"/>
                                         </items>
                                     </List>
-                                </VBox>
-                            </HBox>
+                                
                         </content>
                     </Panel>
                 </pages>

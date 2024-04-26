@@ -15,12 +15,17 @@ sap.ui.define([
                     this.oQuizModel.attachRequestCompleted(this.onModelLoaded, this);
                 }
             },
+
+
             onModelLoaded: function () {
                 this.setupView();
             },
+
             setupView: function () {
                 this.updateSubmitButtonVisibility()
             },
+
+
             updateSubmitButtonVisibility: function () {
                 let oCarousel = this.byId("questionCarousel");
                 let aPages = oCarousel.getPages();
@@ -30,9 +35,13 @@ sap.ui.define([
                 let bIsLastQuestion = iCurrentPage === oData.Questions.length - 1;
                 this.byId("submitQuizButton").setVisible(bIsLastQuestion);
             },
+
+
             onPageChanged: function (oEvent) {
                 this.updateSubmitButtonVisibility();
             },
+
+
             onOptionSelect: function (oEvent) {
                 let oList = oEvent.getSource();
                 let oBindingContext = oList.getBindingContext("quizModel");
@@ -43,6 +52,8 @@ sap.ui.define([
                 oQuestion.userAnswers = aSelectedTexts;
                 this.oQuizModel.refresh();
             },
+
+
             onSubmitQuiz: function () {
                 let score = this.calculateScore();
                 let scoreFormatted = score.toFixed(2);
@@ -55,7 +66,11 @@ sap.ui.define([
                 MessageToast.show(resultMessage, {
                     duration: 6000
                 });
+
+                this.restartQuiz();
             },
+
+
             calculateScore: function () {
                 let oData = this.oQuizModel.getData();
                 let totalQuestions = oData.Questions.length;
@@ -77,6 +92,49 @@ sap.ui.define([
 
                 let scorePercentage = (correctAnswers / totalQuestions) * 100;
                 return scorePercentage;
-            }
+            },
+
+
+                restartQuiz: function () {
+                   
+                    let oData = this.oQuizModel.getData();
+                    let oCarousel = this.byId("questionCarousel");
+                
+                   
+                    oData.Questions.forEach(question => {
+                        question.userAnswers = []; // Clear user answers
+                    });
+                
+                   
+                    let aPages = oCarousel.getPages();
+
+                    aPages.forEach((page) => {
+                        if( page.getContent().length  > 0 ){
+
+                            let oList = page.getContent().find((item) => item instanceof sap.m.List )
+
+                            if(oList){
+                                oList.removeSelections();
+                            }
+                        }
+                        
+                    });
+                
+                    // Refresh the quiz model to apply changes
+                    this.oQuizModel.refresh();
+                
+                    // Set the active page to the first page in the carousel
+                    oCarousel.setActivePage(aPages[0]);
+                }
+                
+
+            
+
+
+
+
+
+
+
         });
     });

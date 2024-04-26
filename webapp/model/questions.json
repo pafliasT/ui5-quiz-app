@@ -111,6 +111,204 @@
             ],
             "multiple": false,
             "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
+        },
+        {
+            "question": "What happens if you execute an app that contains the following bootstrap file? Please choose the correct answer.\n <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootsrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-xx-bindingSyntax=\"complex\" data-sap-ui-resourceroots='{\"sales.reporting\":\"/\"}'></script>",
+            "options": [
+                {
+                    "text": "The application will run without a theme"
+                },
+                {
+                    "text": "Default theme will be used"
+                },
+                {
+                    "text": "Will NOT load and show an error"
+                },
+                {
+                    "text": "Customer-defined default theme will be used"
+                }
+            ],
+            "correctAnswer": [
+                "The application will run without a theme"
+            ],
+            "multiple": false,
+            "userAnswers": []
         }
     ]
 }

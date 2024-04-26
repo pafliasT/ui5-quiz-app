@@ -4,7 +4,7 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}" titleAlignment="Center">
         <content>
-            <Carousel id="questionCarousel" pages="{quizModel>/Questions}" arrowsPlacement="Content" pageChanged="onPageChanged">
+            <Carousel id="questionCarousel" pages="{quizModel>/Questions}"  pageChanged="onPageChanged">
                 <pages>
                     <Panel height="100%">
                         <headerToolbar>
@@ -12,26 +12,25 @@
                                 <Title text="{quizModel>question}" textAlign="Center" width="100%" wrapping="true" class="sapUiTinyMargin"/>
 								</Toolbar>
 							</headerToolbar>
-							<ProgressIndicator id="quizProgress" width="100%" percentValue="{quizModel>/progress}" displayValue="{quizModel>/progressText}"/>
+							<ProgressIndicator id="quizProgress" width="100%" percentValue="{quizModel>/progress}" class="sapUiLargeMarginBottom" displayValue="{quizModel>/progressText}" displayAnimation="true"/>
                         <content>
-                            <HBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" height="100%">
-                                <VBox justifyContent="Center" alignItems="Center" width="100%">
+                            <HBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" height="auto">
+                                <VBox justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" width="auto">
                                     <List id="optionsList"
                                         mode="{= ${quizModel>multiple} ? 'MultiSelect' : 'SingleSelectLeft'}"
                                         selectionChange="onOptionSelect"
-                                        items="{quizModel>options}">
+                                        items="{quizModel>options}"  class="sapUiSmallMarginTop">
                                         <items>
                                             <StandardListItem title="{quizModel>text}" wrapping="true"/>
                                         </items>
                                     </List>
-                                </VBox>
+                                </VBox> 
                             </HBox>
                         </content>
                     </Panel>
                 </pages>
             </Carousel>
         </content>
-		
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
@@ -49,6 +48,5 @@
         <beginButton>
             <Button text="Restart Quiz" press="onRestartQuiz"/>
         </beginButton>
-        
     </Dialog>
 </mvc:View>

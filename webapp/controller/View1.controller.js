@@ -100,29 +100,40 @@ sap.ui.define([
 
         resetQuiz: function () {
             const oCarousel = this.byId("questionCarousel");
-            oCarousel.getPages().forEach(page => {
-                let oList = page.getContent()[0];
-                if (oList.getItems && oList.getItems().length > 0) {
+            const pages = oCarousel.getPages();
 
-                    oList = oList.getItems()[0];
-                    if (oList.getItems && oList.getItems().length > 0) {
-                        oList = oList.getItems()[0];
-                        if (oList instanceof sap.m.List) {
-                            oList.removeSelections(true);
-                        }
-                    }
+            // Recursive function to clear selections in nested Lists
+            const clearListSelections = (control) => {
+                if (control instanceof sap.m.List) {
+                    control.removeSelections(true);
                 }
+                if (control.getContent) {
+                    const contentItems = control.getContent();
+                    contentItems.forEach(clearListSelections);
+                } else if (control.getItems) {
+                    const itemControls = control.getItems();
+                    itemControls.forEach(clearListSelections);
+                }
+            };
+
+            // Apply the recursive function to each page of the Carousel
+            pages.forEach(page => {
+                const content = page.getContent();
+                content.forEach(clearListSelections);
             });
 
+            // Reset the model data for user answers and progress indicators
             const oQuizModel = this.getView().getModel("quizModel");
             oQuizModel.getData().Questions.forEach(question => question.userAnswers = []);
             oQuizModel.refresh();
             oQuizModel.setProperty("/progress", 0);
             oQuizModel.setProperty("/progressText", "0%");
             this.byId("resultsDialog").close();
-            oCarousel.setActivePage(oCarousel.getPages()[0]);
+            oCarousel.setActivePage(pages[0]);
             this.toggleSubmitButtonVisibility();
         }
+
+
 
 
     });
